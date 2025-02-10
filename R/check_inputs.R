@@ -99,7 +99,7 @@ check_inputs = function(input,
     }
     cell_types = as.character(meta[[cell_type_col]])
     expr = Signac::GetAssayData(input, slot = 'peaks')
-  } else if ("ArchR" %in% class(input)){
+  } else if ("ArchRProject" %in% class(input)){
     # confirm ArchR is installed
     if (!requireNamespace("ArchR", quietly = TRUE)) {
       stop("install \"ArchR\" R package for Libra compatibility with ",
