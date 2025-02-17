@@ -184,5 +184,6 @@ singlecell_de = function(
         }
     }
     DE %<>% bind_rows()
+    print(DE[1:10,]
     return(DE)
 }
