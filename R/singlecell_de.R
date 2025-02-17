@@ -179,7 +179,7 @@ singlecell_de = function(
                     mat = sc[['RNA']]@data
                     res = da_function_wrapper(mat, meta, method, cell_type)
                 }
-                DE[[cell_type]] = res
+                DE[["cell_type"]] = res
             }, error = function(e) message(e))
         }
     }
