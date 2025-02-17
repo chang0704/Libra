@@ -268,43 +268,6 @@ run_de = function(input,
     ) %>%
     as.character()
 
-  DE %<>%
-    # calculate adjusted p values
-    group_by(cell_type) %>%
-    mutate(p_val_adj = p.adjust(p_val, method = 'BH')) %>%
-    # make sure gene is a character not a factor
-    mutate(gene = as.character(gene)) %>%
-    dplyr::select(cell_type, gene, p_val, p_val_adj, de_family, de_method, de_type) %>%
-    dplyr::left_join(out_stats, by = c('gene', 'cell_type')) %>%
-    dplyr::select(cell_type,
-                  gene,
-                  avg_logFC,
-                  pct.1,
-                  pct.2,
-                  exp1,
-                  exp2,
-                  p_val,
-                  p_val_adj,
-                  de_family,
-                  de_method,
-                  de_type
-    ) %>%
-    ungroup() %>%
-    arrange(cell_type, gene) %>%
-    dplyr::rename(
-      !!paste0(label_levels[1], '.exp') := exp1,
-      !!paste0(label_levels[2], '.exp') := exp2,
-      !!paste0(label_levels[1], '.pct') := pct.1,
-      !!paste0(label_levels[2], '.pct') := pct.2
-    )
-    
-    if (input_type == 'scATAC') {
-      DE %<>%
-          dplyr::rename(
-              da_family = de_family,
-              da_method = de_method,
-              da_type = de_type
-          )
-    }
+  
     DE
 }
